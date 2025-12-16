@@ -1,4 +1,5 @@
-# IntelliRoute
+# IntelliRoute  -  AI-Powered Query Assignment System
+
 
 **AI-Powered Query Assignment System** - An intelligent platform that automatically routes technical support queries to the most suitable engineers based on complexity analysis, skill matching, and availability.
 
