@@ -238,11 +238,18 @@ npm install
 
 Open a terminal:
 
+If you have java version 17 installed
 ```bash
 cd backend/IntelliRoute
 mvn spring-boot:run
 ```
+If any other java version is installed
 
+```bash
+cd backend/IntelliRoute
+export JAVA_HOME=$(/usr/libexec/java_home -v 17)
+mvn spring-boot:run
+```
 Wait for the message: `Started IntelliRouteApplication in X.XXX seconds`
 
 The backend will be available at: `http://localhost:8080`
