@@ -37,6 +37,7 @@ IntelliRoute is a full-stack application that streamlines technical support work
 IntelliRoute/
 ├── backend/
 │   └── IntelliRoute/
+│       ├── Dockerfile                       # Backend Docker config
 │       ├── pom.xml                          # Maven dependencies
 │       └── src/
 │           └── main/
@@ -71,6 +72,8 @@ IntelliRoute/
 │               └── resources/
 │                   └── application.yml                  # Configuration
 ├── frontend/
+│   ├── Dockerfile                         # Frontend Docker config
+│   ├── nginx.conf                         # Nginx config for Docker
 │   ├── package.json                       # NPM dependencies
 │   ├── vite.config.ts                     # Vite configuration
 │   ├── tailwind.config.js                 # Tailwind CSS config
@@ -81,10 +84,11 @@ IntelliRoute/
 │       ├── App.tsx                        # Main component (tabs UI)
 │       ├── api.ts                         # API client functions
 │       └── index.css                      # Global styles
+├── .env                                   # Environment variables (Docker)
 ├── .gitignore                             # Git ignore rules
+├── docker-compose.yml                     # Docker services orchestration
 └── README.md                              # This file
 ```
-
 ## 🔄 Data Flow
 
 ```
@@ -95,25 +99,25 @@ IntelliRoute/
        │ HTTP REST API
        ▼
 ┌─────────────────────────────────┐
-│   Spring Boot Backend          │
-│   ┌─────────────────────────┐  │
-│   │  REST Controllers       │  │
-│   └───────────┬─────────────┘  │
+│   Spring Boot Backend           │
+│   ┌─────────────────────────┐   │
+│   │  REST Controllers       │   │
+│   └───────────┬─────────────┘   │
 │               │                 │
-│   ┌───────────▼─────────────┐  │
-│   │  Service Layer          │  │
-│   │  - AssignmentService    │  │
-│   │  - QueryService         │  │
-│   │  - EngineerService      │  │
-│   └───────────┬─────────────┘  │
+│   ┌───────────▼─────────────┐   │
+│   │  Service Layer          │   │
+│   │  - AssignmentService    │   │
+│   │  - QueryService         │   │
+│   │  - EngineerService      │   │
+│   └───────────┬─────────────┘   │
 │               │                 │
-│   ┌───────────▼─────────────┐  │
-│   │  AIClient (Gemini API)  │  │
-│   └───────────┬─────────────┘  │
+│   ┌───────────▼─────────────┐   │
+│   │  AIClient (Gemini API)  │   │
+│   └───────────┬─────────────┘   │
 │               │                 │
-│   ┌───────────▼─────────────┐  │
+│   ┌───────────▼─────────────┐   │
 │   │  MongoDB Repositories    │  │
-│   └───────────┬─────────────┘  │
+│   └───────────┬─────────────┘   │
 └───────────────┼─────────────────┘
                 │
                 ▼
@@ -153,10 +157,47 @@ Before running the project, ensure you have:
 - **Java 17+** - [Download](https://adoptium.net/)
 - **Maven 3.6+** - [Download](https://maven.apache.org/download.cgi)
 - **Node.js 18+** - [Download](https://nodejs.org/)
+- **Docker & Docker Compose** - [Download](https://www.docker.com/products/docker-desktop/)
 - **MongoDB** - Cloud (MongoDB Atlas) or local instance
 - **Google Gemini API Key** - [Get from Google AI Studio](https://makersuite.google.com/app/apikey)
 
-## 🚀 Setup Instructions
+## 🐳 Running with Docker (Recommended)
+
+The easiest way to run IntelliRoute is using Docker Compose. This spins up the backend, frontend, and a local MongoDB instance automatically.
+
+### 1. Configure Environment
+
+Create a `.env` file in the project root (where `docker-compose.yml` is located):
+
+```bash
+touch .env
+```
+
+Add your Gemini API key to the `.env` file:
+
+```env
+GEMINI_API_KEY=AIzaSy...your-key-here
+```
+
+### 2. Start the Application
+
+Run the following command to build and start all services:
+
+```bash
+docker-compose up -d --build
+```
+
+- **Frontend:** http://localhost:5173
+- **Backend:** http://localhost:8080
+- **MongoDB:** localhost:27017
+
+### 3. Manage the Application
+
+- **View Logs:** `docker-compose logs -f`
+- **Stop App:** `docker-compose down`
+- **Rebuild:** `docker-compose up -d --build`
+
+##  Manual Setup Instructions
 
 ### Step 1: Clone the Repository
 
