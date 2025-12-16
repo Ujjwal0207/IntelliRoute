@@ -1,0 +1,18 @@
+# Maven / Java
+target/
+*.log
+*.class
+*.jar
+*.war
+*.iml
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+
+# OS files
+.DS_Store
+
+# Env files
+backend/IntelliRoute/.env
