@@ -116,14 +116,14 @@ IntelliRoute/
 │   └───────────┬─────────────┘   │
 │               │                 │
 │   ┌───────────▼─────────────┐   │
-│   │  MongoDB Repositories    │  │
+│   │  MongoDB Repositories   │   │
 │   └───────────┬─────────────┘   │
 └───────────────┼─────────────────┘
                 │
                 ▼
          ┌──────────────┐
          │   MongoDB    │
-         │  (Database)   │
+         │  (Database)  │
          └──────────────┘
 
 Assignment Flow:
